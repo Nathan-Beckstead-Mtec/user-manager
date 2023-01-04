@@ -1,0 +1,33 @@
+data to store:
+    +name
+    +username
+    +email address
+    +age
+    -uuid
+
+
+
+
+
+/listing or /
+    table of:
+        +name
+        +username
+        +email address
+        +age
+        edit link
+        delete link
+
+
+
+/create user
+    form
+        name
+        username
+        email address
+        age
+    forwards to /listing
+
+/edit/user
+    /create user
+    but prepopulated with data

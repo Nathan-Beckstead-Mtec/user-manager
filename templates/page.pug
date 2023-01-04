@@ -1,0 +1,16 @@
+html
+	head 
+		title website
+		link(rel="stylesheet", href="/static/style.css")
+	body 
+		.header 
+			h1 UserManager
+			.links
+				a(href='/create') Create new user
+				a(href='/') List users
+		.content
+			block content 
+				h1 how did I get here?
+		
+		.footer 
+			h3 Thanks for coming to my website!

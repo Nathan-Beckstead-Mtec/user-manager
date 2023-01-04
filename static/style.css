@@ -1,0 +1,133 @@
+body{
+    border: 0;
+    margin: 0;
+    background-color: #282a36;
+    color: #f8f8f2;
+}
+
+div.header{
+    background-color: #44475a;
+    
+
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    padding:1em 2em;
+    
+}
+.header h1{
+    color:#bd93f9;
+    margin:0;
+}
+
+.links{
+    display: flex;
+    gap:0.5em;
+    row-gap: 0.5em;
+}
+
+.links a{
+    background-color: #6272a4;
+    border-radius: 1em;
+    padding:0.5em 1em;
+    font-size: 1em;
+    color:inherit;
+    text-decoration: none;
+
+    position:relative;
+    top:0;
+    left:0;
+
+    box-shadow: 0px 0px 0px 1px #282a36;
+    transition: left 0.2s, top 0.2s, box-shadow 0.2s, background-color 0.1s;
+}
+
+.links a:hover{
+    text-decoration: underline;
+    box-shadow: -6px 2px 8px 2px #282a36;
+    left:2px;
+    top: -6px;
+    background-color: #bd93f9;
+}
+
+.content{
+    padding: 1em 2em;
+}
+
+table{
+    width: 100%;
+    border-color: #50fa7b;
+    border-style: solid;
+    border-width: 3px;
+    border-collapse: collapse;
+}
+
+thead{
+    border-color: inherit;
+    border-style: solid;
+    border-bottom-width: 2px;
+    background-color: #44475a;
+}
+tbody{
+    border-color: inherit;
+}
+
+td:nth-of-type(1n+2){
+    border-left: 2px solid #44475a;
+}
+td{
+    text-align: center;
+    border-top: 1px solid #50fa7b;
+    padding:0.25em 0.5em;
+}
+tbody tr:first-child td{
+    border-top: 2px solid #50fa7b;
+
+}
+
+td a{
+    color:inherit;
+    text-decoration: unset;
+    font-weight:600;
+}
+td a:hover{
+    color:#bd93f9;
+    text-decoration: underline;
+}
+
+td:last-child{
+    width:15%;
+}
+
+td form{
+    margin:0;
+}
+td form button{
+    all:unset;
+    color:inherit;
+    background-color: #44475a;
+    border: 2px solid #ff5555;
+    padding: 0.125em 0.25em;
+    border-radius: 0.625em;
+    font-weight:600;
+    
+}
+
+td form button:hover{
+    cursor: pointer;
+    background-color: #f00;
+    border-color: #f00;
+    font-weight: 900;
+    padding: 0.125em 0.75em;
+    color:#000;
+}
+
+td form button:active{
+    cursor: pointer;
+    background-color: #000;
+    border-color: #000;
+    font-weight: 900;
+    padding: 0.125em 0.75em;
+    color:#f00;
+}

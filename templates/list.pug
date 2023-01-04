@@ -1,0 +1,28 @@
+extends page.pug
+
+mixin user(obj, uuid)
+	tr 
+		td=obj.username
+		td=obj.name
+		td=obj.email
+		td=obj.age
+		td
+			a(href="/edit/" + uuid) Edit
+		td
+			form(action=("/delete/" + uuid), method="post") 
+				button(type="submit") Delete
+				//- onClick="window.location.reload()"
+
+block content 
+	table 
+		thead 
+			tr 
+				th Username 
+				th Name
+				th Email
+				th Age
+				th
+				th 
+		tbody 
+			each user, uuid in users
+				+user(user, uuid)
