@@ -131,3 +131,51 @@ td form button:active{
     padding: 0.125em 0.75em;
     color:#f00;
 }
+
+
+.content > form{
+    display:grid;
+    gap:10px;
+    grid-template-columns: 6em 3.5em min-content;
+
+    grid-auto-flow: row;
+    /* redundant but I use this */
+}
+
+
+
+
+.content > form .section{
+    grid-row: auto;
+    grid-column: 1/ span 3;
+
+    display:grid;
+    grid: subgrid / subgrid;
+    /* subgriding goes burrr */
+}
+
+.content > form .section label{
+    grid-row: 1;
+    grid-column: 1/1;
+}
+.content > form .section input{
+    grid-row: 1;
+    grid-column: 2 / span 2;
+}
+.content > form .section input[name="age"]{
+    grid-row: 1;
+    grid-column: 2/2;
+}
+
+.content > form .submit{
+    grid-row: auto;
+    grid-column: 1 / span 2;
+        
+    display: flex;
+    justify-content: space-around;
+    /* padding: 0 10%; */
+    width:100%;
+    box-sizing: border-box;
+}
+
+

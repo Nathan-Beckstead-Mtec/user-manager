@@ -4,18 +4,18 @@ block content
 	div.title
 		h1 Edit user: #{user.username}
 	form(action="/edit/"+ user.uuid, method="post")
-		div.section 
+		.section 
 			label(for="inputUsername") Username:
 			input(type="text", value=(user.username), id="inputUsername", name="username", autocomplete="username", required=true)
-		div.section 
+		.section 
 			label(for="inputName") First Name:
 			input(type="text", value=(user.name), id="inputName", name="name", autocomplete="given-name", required=true)
-		div.section 
+		.section 
 			label(for="inputEmail") Email:
 			input(type="email", value=(user.email), id="inputEmail", name="email", autocomplete="email", required=true)
-		div.section 
+		.section 
 			label(for="inputAge") Age:
 			input(type="number", value=(user.age), id="inputAge", name="age", min="0", required=true, step="1")
-		div.section
+		.submit
 			button(type="submit") Save
 			button(type="reset") Reset
