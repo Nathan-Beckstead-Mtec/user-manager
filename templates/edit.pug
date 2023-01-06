@@ -6,16 +6,22 @@ block content
 	form(action="/edit/"+ user.uuid, method="post")
 		.section 
 			label(for="inputUsername") Username:
-			input(type="text", value=(user.username), id="inputUsername", name="username", autocomplete="username", required=true)
+			.resizer(data-value=(user.username + '______'))
+				input(type="text", value=(user.username), id="inputUsername", name="username", autocomplete="username", required=true, onInput="this.parentNode.dataset.value = this.value + '______'")
 		.section 
 			label(for="inputName") First Name:
-			input(type="text", value=(user.name), id="inputName", name="name", autocomplete="given-name", required=true)
+			.resizer(data-value=(user.name + '______'))
+				input(type="text", value=(user.name), id="inputName", name="name", autocomplete="given-name", required=true, onInput="this.parentNode.dataset.value = this.value + '______'")
 		.section 
 			label(for="inputEmail") Email:
-			input(type="email", value=(user.email), id="inputEmail", name="email", autocomplete="email", required=true)
+			.resizer(data-value=(user.email + '______'))
+				input(type="email", value=(user.email), id="inputEmail", name="email", autocomplete="email", required=true, onInput="this.parentNode.dataset.value = this.value + '______'")
+				//- '_'.repeat(this.value.length + 1) use this for passwords
 		.section 
 			label(for="inputAge") Age:
 			input(type="number", value=(user.age), id="inputAge", name="age", min="0", required=true, step="1")
+		br
 		.submit
 			button(type="submit") Save
 			button(type="reset") Reset
+	p This looks better in Firefox because Chrome doesn't support subgridding

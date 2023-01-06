@@ -1,10 +1,14 @@
 const express = require("express");
 const crypto = require("crypto");
+const fs = require("fs");
+
 
 const app = express();
 const port = 3000;
 
 
+var users = {};
+/*
 var users = {
 	1: {
 		name:"bob",
@@ -13,6 +17,63 @@ var users = {
 		age:69
 	}
 }; //key = uuid
+*/
+
+function save(reason = "no reason supplied"){
+	try {
+
+		fs.writeFile("./database.json", JSON.stringify(users), (err) => {
+			if (err){
+				throw err;
+			}
+			console.group("Save:");
+				console.log("Reason for save: " + reason);
+				console.log("Write Successful");
+			console.groupEnd("Save:");
+		})
+
+
+
+	} catch (error) {
+		console.group("Save \x1b[41mFAILED:\x1b[0m");
+			console.log("Reason for save: " + reason);
+			console.error("Error: \x1b[31m" + error + "\x1b[0m");
+		console.groupEnd("Save \x1b[41mFAILED:\x1b[0m");
+	}
+	
+
+}
+function load(){
+	try {
+		
+		users = JSON.parse(
+			fs.readFileSync("./database.json", {encoding: "utf-8"})
+		);
+		console.log("loaded ./database.json");
+
+	} catch (error) {
+		console.group("Load \x1b[41mFAILED:\x1b[0m");
+			console.error("Error: \x1b[31m" + error + "\x1b[0m");
+			console.error("Using garbage data");
+		console.groupEnd("Load \x1b[41mFAILED:\x1b[0m");
+
+		users = {
+			1: {
+				name:"admin",
+				username:"LOAD FAILED",
+				email:"admin@example.com",
+				age:69
+			}
+		};
+	}
+}
+
+
+load();
+
+
+
+
 
 app.set("views", "./templates");
 app.set("view engine", "pug");
@@ -31,7 +92,7 @@ app.get("/", (req,res) => {
 
 app.get("/edit/:uuid", (req,res) => {
 	const uuid = req.params.uuid;
-	console.log("editing uuid:(" + uuid + ")");
+	// console.log("editing uuid:(" + uuid + ")");
 
 	if(users[uuid] === undefined){
 		res.status(404);
@@ -51,19 +112,19 @@ app.post("/edit/:uuid", (req, res) => {
 	let uuid = req.params.uuid;
 	
 	if (users[uuid] === undefined){
-		console.log("could not find uuid:" + uuid);
+		console.log("could not find uuid: " + uuid);
 		uuid = crypto.webcrypto.randomUUID();
 		console.log("           new uuid: " + uuid);
 
 	}
 
-	editUser(req,res,uuid);
+	editUser(req,res,uuid,"edited");
 });
 
 app.post("/create", (req,res) => {
 
 	const uuid = crypto.webcrypto.randomUUID();
-	editUser(req,res,uuid);
+	editUser(req,res,uuid,"created");
 })
 
 function dataValidation(user){
@@ -77,10 +138,10 @@ function dataValidation(user){
 		throw Error("Missing data");
 	}
 
-	console.log(typeof user.age);
+	// console.log(typeof user.age);
 	user.age = Number.parseInt(user.age);
-	console.log(typeof user.age);
-	if(!(user.age>0)){ //double negative to account for NaN
+	// console.log(typeof user.age);
+	if(!(user.age>=0)){ //double negative to account for NaN
 		throw Error("Invalid age");
 	}
 
@@ -88,7 +149,7 @@ function dataValidation(user){
 
 	return user; //not strictly neccissary because pass by refrence, but improves code readability 
 }
-function editUser(req,res,uuid){
+function editUser(req,res,uuid, pastTenseVerbDescribingTransaction){
 	const newUser = {};
 	newUser.username = req.body.username
 	newUser.name = req.body.name
@@ -106,6 +167,8 @@ function editUser(req,res,uuid){
 	}
 
 	users[uuid] = newUser;
+
+	save("a user was " + pastTenseVerbDescribingTransaction);
 
 	res.status(201) //created
 	// res.setHeader("Location", "/");
@@ -125,10 +188,10 @@ app.post("/delete/:uuid", (req,res) => {
 		return;
 	}
 
-	delete users[uuid]; //      O
-	res.status(204) //good   👌/|\👍
-	res.redirect("/"); //      / \
-	//                         | |  
+	delete users[uuid]; //                O
+	save("a user was deleted");//      👌/|\👍
+	res.status(204) // all good          / \
+	res.redirect("/"); //                | |  
 });
 
 app.listen(port, () => {

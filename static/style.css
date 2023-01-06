@@ -1,7 +1,7 @@
 body{
     border: 0;
     margin: 0;
-    background-color: #282a36;
+    background-color: #000;
     color: #f8f8f2;
 }
 
@@ -45,14 +45,37 @@ div.header{
 
 .links a:hover{
     text-decoration: underline;
-    box-shadow: -6px 2px 8px 2px #282a36;
+    box-shadow: -2px 6px 8px 2px #282a36;
     left:2px;
     top: -6px;
     background-color: #bd93f9;
 }
 
+
+.footer{
+
+    margin-top: auto;
+    background-color: #44475a;
+    
+
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    padding:0.5em 2em;
+
+    border-bottom: 1px solid #bd93f9;
+}
+
+.footer h3, .footer p{
+    margin:0;
+}
+
+
+
 .content{
-    padding: 1em 2em;
+    padding: 2em 2em;
+    background-color: #282a36;
 }
 
 table{
@@ -137,6 +160,7 @@ td form button:active{
     display:grid;
     gap:10px;
     grid-template-columns: 6em 3.5em min-content;
+    grid-auto-columns: min-content;
 
     grid-auto-flow: row;
     /* redundant but I use this */
@@ -158,7 +182,7 @@ td form button:active{
     grid-row: 1;
     grid-column: 1/1;
 }
-.content > form .section input{
+.content > form .section > input{
     grid-row: 1;
     grid-column: 2 / span 2;
 }
@@ -172,10 +196,100 @@ td form button:active{
     grid-column: 1 / span 2;
         
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     /* padding: 0 10%; */
     width:100%;
     box-sizing: border-box;
 }
 
 
+.content > form .submit button {
+    border:none;
+    
+    
+    text-align: center;
+    font-size: 1em;
+
+    background-color: #6272a4;
+    border-radius: 1.5em;
+    padding:0.25em 0.75em;
+    color:inherit;
+
+    position:relative;
+    top:0;
+    left:0;
+
+    box-shadow: 0px 0px 0px 1px #282a36;
+    transition: left 0.2s, top 0.2s, box-shadow 0.2s, background-color 0.1s;
+}
+.content > form .submit button:hover {
+    text-decoration: underline;
+    box-shadow: -2px 6px 8px 2px #000;
+    left:2px;
+    top: -6px;
+    background-color: #bd93f9;
+}
+
+
+
+
+
+.resizer {
+    grid-row: 1;
+    grid-column: 2 / span 2;
+    /* border: 1px dashed lime; */
+
+    display: grid;
+
+}
+
+.resizer::after{
+    content: attr(data-value) ' ';
+    /* visibility: hidden; */
+    font: inherit;
+    white-space: nowrap;
+    z-index: -5;
+    grid-area: 1 / 1;
+}
+.resizer input{
+    width:100%;
+    min-width: 6em;
+    font-size: 1em;
+    font:inherit;
+    padding:0;
+    padding-left: 0.25em;
+    border:none;
+    grid-area: 1 / 1;
+
+}
+
+
+
+input:placeholder-shown, input:blank{
+    background-color: #44475a;
+}
+input{
+    background-color: #44475a;
+    color:inherit;
+    border:none;
+    border-radius: 4px;
+}
+input:focus{
+    background-color: #6272a4;
+}
+input:invalid{
+    box-shadow: 0 0 3px 1px #ff5555;
+}
+input:user-invalid{
+    box-shadow: 0 0 5px 2px #ff5555;
+}
+input:valid{
+    box-shadow: 0 0 3px 1px #50fa7b;
+}
+
+
+/* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input */
+
+
+/* onInput="this.parentNode.dataset.value = this.value + '_'" */
+/* '_'.repeat(this.value.length + 1) use this for passwords */

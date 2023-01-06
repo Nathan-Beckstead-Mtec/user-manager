@@ -6,15 +6,19 @@ block content
 	form(action="/create", method="post")
 		.section 
 			label(for="inputUsername") Username:
-			input(type="text", id="inputUsername", name="username", autocomplete="username", required=true)
+			.resizer
+				input(type="text", id="inputUsername", name="username", autocomplete="username", required=true, onInput="this.parentNode.dataset.value = this.value + '______'")
 		.section 
 			label(for="inputName") First Name:
-			input(type="text", id="inputName", name="name", autocomplete="given-name", required=true)
+			.resizer
+				input(type="text", id="inputName", name="name", autocomplete="given-name", required=true, onInput="this.parentNode.dataset.value = this.value + '______'")
 		.section 
 			label(for="inputEmail") Email:
-			input(type="email", id="inputEmail", name="email", autocomplete="email", required=true)
+			.resizer
+				input(type="email", id="inputEmail", name="email", autocomplete="email", required=true, onInput="this.parentNode.dataset.value = this.value + '______'")
 		.section 
 			label(for="inputAge") Age:
 			input(type="number", id="inputAge", name="age", min="0", required=true, step="1")
-		.section
+		.submit
 			button(type="submit") Create User
+	p This looks better in Firefox because Chrome doesn't support subgridding
