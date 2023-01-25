@@ -1,0 +1,6 @@
+projectKey=users
+serverUrl=http://172.17.0.2:9000
+serverVersion=9.8.0.63668
+dashboardUrl=http://172.17.0.2:9000/dashboard?id=users
+ceTaskId=AYWhqz7ErMohDJWo1wRH
+ceTaskUrl=http://172.17.0.2:9000/api/ce/task?id=AYWhqz7ErMohDJWo1wRH
